@@ -8,14 +8,30 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController playerController;
 
+    public Transform playerRotation;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+
     public float speed = 12f;
     public float gravity = -9.81f;
+    public float jumpHeight = 3f;
 
     Vector3 velocity;
+    Vector3 dash;
+    bool isGrounded;
 
     // Update is called once per frame
     void Update()
     {
+
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -1f;
+        }
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -23,8 +39,36 @@ public class PlayerMovement : MonoBehaviour
 
         playerController.Move(move * speed * Time.deltaTime);
 
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        if (Input.GetButtonDown("Dash Left") && isGrounded)
+        {
+            // dash left
+            dash = -transform.right.normalized * 200000 * Time.deltaTime;
+
+            Debug.Log(dash);
+        }
+
+        if (Input.GetButtonDown("Dash Right") && isGrounded)
+        {
+            // dash right
+            dash = transform.right.normalized * 200000 * Time.deltaTime;
+            Debug.Log(dash);
+        }
+
         velocity.y += gravity * Time.deltaTime;
 
         playerController.Move(velocity * Time.deltaTime);
+
+        playerController.Move(dash * Time.deltaTime);
+
+        
+
+        dash = new Vector3();
     }
+
+    
 }
