@@ -11,18 +11,23 @@ public class EnemyAI : MonoBehaviour
 
     public LayerMask groundMask, playerMask;
 
+    //idle variables
+    [Header("Idle")]
+    public float idleTime = 1;
+    private float idleCount = 0;
     //patrol varaibles
-    public Vector3 walkPoint;
+    [Header("Patrol")]
+    private Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
-
+    [Header("Attack")]
     // attack variables
     public float timeBetweenAttack;
     bool alreadyAttacked;
-
+    [Header("General")]
     // state determiners
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    private bool playerInSightRange, playerInAttackRange;
 
     private void Awake()
     {
@@ -33,13 +38,22 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (this.gameObject.transform.position.y > 2)
+        {
+            if (this.gameObject.GetComponent<Rigidbody>() == true)
+            {
+                Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
+                rb.MovePosition(new Vector3(0, -1, 0));
+            }
+        }
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, playerMask);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerMask);
 
         if (!playerInSightRange && !playerInAttackRange)
         {
-            StartCoroutine(Patrolling());
-            //Idling();
+            Idling();
+            
         }
 
         if (playerInSightRange && !playerInAttackRange)
@@ -54,7 +68,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    IEnumerator Patrolling()
+    void Patrolling()
     {
         if (!walkPointSet)
         {
@@ -64,7 +78,7 @@ public class EnemyAI : MonoBehaviour
         if (walkPointSet)
         {
             agent.SetDestination(walkPoint);
-            yield return new WaitForSeconds(2);
+            
         }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
@@ -114,8 +128,17 @@ public class EnemyAI : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    IEnumerator Idling()
+    
+    void Idling()
     {
-        yield return new WaitForSeconds(2);
+        if (idleCount >= idleTime)
+        {
+            Patrolling();
+            idleCount = 0;
+        }
+        else
+        {
+            idleCount += Time.deltaTime;
+        }
     }
 }
