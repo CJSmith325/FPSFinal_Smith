@@ -5,13 +5,13 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public HealthBar hb;
+    private HealthBar hb;
 
-    public float playHealth;
+    private float playHealth;
 
     public NavMeshAgent agent;
 
-    public Transform player;
+    private Transform player;
 
     public LayerMask groundMask, playerMask;
 
@@ -37,6 +37,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
+        hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         player = GameObject.Find("FirstPersonPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
