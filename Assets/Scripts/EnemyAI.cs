@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class EnemyAI : MonoBehaviour
 {
     private HealthBar hb;
+
+    private CameraShake cameraShake;
 
     private float playHealth;
 
@@ -37,6 +40,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
+        cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         player = GameObject.Find("FirstPersonPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -158,6 +162,7 @@ public class EnemyAI : MonoBehaviour
     public void DoDamage()
     {
         PlayerHealth.playerHealth -= 10;
+        StartCoroutine(cameraShake.Shake(0.25f, 0.7f));
         hb.SetHealth();
     }
 }

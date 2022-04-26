@@ -446,7 +446,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.34315792
+      - time: 0.3663158
         functionName: DoDamage
         data: 
         objectReferenceParameter: {fileID: 191818461486068404, guid: 70092bd25f76ffd4d8e49f4634b08a30, type: 3}
