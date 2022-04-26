@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    public HealthBar hb;
+
+    public float playHealth;
+
     public NavMeshAgent agent;
 
     public Transform player;
@@ -28,11 +32,13 @@ public class EnemyAI : MonoBehaviour
     // state determiners
     public float sightRange, attackRange;
     private bool playerInSightRange, playerInAttackRange;
+    private Animator animator;
 
     private void Awake()
     {
         player = GameObject.Find("FirstPersonPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -53,18 +59,22 @@ public class EnemyAI : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange)
         {
             Idling();
-            
+            animator.SetBool("attackRange", false);
+            animator.SetBool("sightRange", false);
         }
 
         if (playerInSightRange && !playerInAttackRange)
         {
             Chasing();
-            
+            animator.SetBool("attackRange", false);
+            animator.SetBool("sightRange", true);
         }
 
         if (playerInSightRange && playerInAttackRange)
         {
             Attacking();
+            animator.SetBool("attackRange", true);
+            animator.SetBool("sightRange", true);
         }
     }
 
@@ -103,8 +113,10 @@ public class EnemyAI : MonoBehaviour
         if (!alreadyAttacked)
         {
             // attack code inserted here
-
-
+            animator.Play("RightHand@Attack01", -1, 0f);
+            PlayerHealth.playerHealth -= 10;
+            hb.SetHealth();
+            Debug.Log(PlayerHealth.playerHealth);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttack);
         }
