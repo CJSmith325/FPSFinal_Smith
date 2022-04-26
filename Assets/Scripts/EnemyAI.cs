@@ -37,6 +37,7 @@ public class EnemyAI : MonoBehaviour
     private bool playerInSightRange, playerInAttackRange;
     private Animator animator;
     public float runSpeed = 2f;
+    public float health = 50;
 
     private void Awake()
     {
@@ -164,5 +165,19 @@ public class EnemyAI : MonoBehaviour
         PlayerHealth.playerHealth -= 10;
         StartCoroutine(cameraShake.Shake(0.25f, 0.7f));
         hb.SetHealth();
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (health <= 0f)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }
