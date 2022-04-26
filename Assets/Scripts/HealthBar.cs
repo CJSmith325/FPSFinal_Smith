@@ -22,8 +22,9 @@ public class HealthBar : MonoBehaviour
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetHealth()
+    public IEnumerator SetHealth()
     {
+        yield return new WaitForSeconds(0.5f);
         slider.value = PlayerHealth.playerHealth;
 
         fill.color = gradient.Evaluate(slider.normalizedValue);

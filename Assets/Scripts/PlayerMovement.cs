@@ -47,25 +47,26 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Dash Left") && isGrounded)
         {
             // dash left
-            dash = -transform.right.normalized * 200000 * Time.deltaTime;
+            dash -= transform.TransformDirection(Vector3.right * 3);
 
             Debug.Log(dash);
+            playerController.Move(dash);
+            dash = new Vector3();
         }
 
         if (Input.GetButtonDown("Dash Right") && isGrounded)
         {
             // dash right
-            dash = transform.right.normalized * 200000 * Time.deltaTime;
+            dash += transform.TransformDirection(Vector3.right * 3);
+
             Debug.Log(dash);
+            playerController.Move(dash);
+            dash = new Vector3();
         }
 
         velocity.y += gravity * Time.deltaTime;
 
         playerController.Move(velocity * Time.deltaTime);
-
-        playerController.Move(dash * Time.deltaTime);
-
-        
 
         dash = new Vector3();
     }

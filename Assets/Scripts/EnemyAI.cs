@@ -33,6 +33,7 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange;
     private bool playerInSightRange, playerInAttackRange;
     private Animator animator;
+    public float runSpeed = 2f;
 
     private void Awake()
     {
@@ -101,6 +102,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Chasing()
     {
+        agent.speed = 5.4f;
         agent.SetDestination(player.position);
     }
 
@@ -115,7 +117,7 @@ public class EnemyAI : MonoBehaviour
             // attack code inserted here
             animator.Play("RightHand@Attack01", -1, 0f);
             PlayerHealth.playerHealth -= 10;
-            hb.SetHealth();
+            StartCoroutine(hb.SetHealth());
             Debug.Log(PlayerHealth.playerHealth);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttack);
@@ -143,6 +145,7 @@ public class EnemyAI : MonoBehaviour
     
     void Idling()
     {
+        agent.speed = 3.5f;
         if (idleCount >= idleTime)
         {
             Patrolling();
