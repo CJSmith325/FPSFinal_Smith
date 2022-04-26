@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class HealthBar : MonoBehaviour
         SetMaxHealth();
     }
 
+    private void Update()
+    {
+        if (slider.value == slider.minValue)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+    }
+
     public void SetMaxHealth()
     {
         slider.maxValue = PlayerHealth.playerHealth;
@@ -22,9 +31,9 @@ public class HealthBar : MonoBehaviour
         fill.color = gradient.Evaluate(1f);
     }
 
-    public IEnumerator SetHealth()
+    public void SetHealth()
     {
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         slider.value = PlayerHealth.playerHealth;
 
         fill.color = gradient.Evaluate(slider.normalizedValue);

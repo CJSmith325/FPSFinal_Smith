@@ -117,9 +117,6 @@ public class EnemyAI : MonoBehaviour
         {
             // attack code inserted here
             animator.Play("RightHand@Attack01", -1, 0f);
-            PlayerHealth.playerHealth -= 10;
-            StartCoroutine(hb.SetHealth());
-            Debug.Log(PlayerHealth.playerHealth);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttack);
         }
@@ -156,5 +153,11 @@ public class EnemyAI : MonoBehaviour
         {
             idleCount += Time.deltaTime;
         }
+    }
+
+    public void DoDamage()
+    {
+        PlayerHealth.playerHealth -= 10;
+        hb.SetHealth();
     }
 }
