@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Stopped at 17:30 of brackeys fps movement
 
@@ -20,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     Vector3 dash;
     bool isGrounded;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 
     // Update is called once per frame
     void Update()

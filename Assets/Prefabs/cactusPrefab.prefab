@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1145532585958349209}
   - component: {fileID: 1145532586122437861}
   - component: {fileID: 249550949379818603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cactusPrefab
   m_TagString: Other
   m_Icon: {fileID: 0}

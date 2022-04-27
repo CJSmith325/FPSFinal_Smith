@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1078947199795797199}
   - component: {fileID: 1078947197783395966}
   - component: {fileID: 7013284554342296899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: shinyRock
   m_TagString: Other
   m_Icon: {fileID: 0}
