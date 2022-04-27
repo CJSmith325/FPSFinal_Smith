@@ -1,9 +1,16 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class GunScript : MonoBehaviour
 {
     public float damage = 10f;
     public float range = 28f;
+
+    int maxAmmo = 8;
+    private int currentAmmo;
+    public float reloadTime = 1.5f;
+    private bool isReloading = false;
 
     public ParticleSystem muzzleFlash;
     public GameObject hitEffect;
@@ -11,25 +18,46 @@ public class GunScript : MonoBehaviour
     public Camera fpsCam;
     private AudioClip gunShot;
     private AudioSource audioSource;
-    
+    public TextMeshProUGUI ammoVal;
+
+    private Animation anim;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         gunShot = GetComponent<AudioClip>();
-        
+        anim = GetComponent<Animation>();
+        currentAmmo = maxAmmo;
+        ammoVal.text = currentAmmo.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isReloading)
+            return;
+        
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(GunReload());
+            return;
+        }
+
         if (Input.GetButtonDown("Fire1"))
         {
-            
+            anim.Play();
             PlayShootingSound();
             Shoot();
             
         }
+    }
+
+    IEnumerator GunReload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+        currentAmmo = maxAmmo;
+        isReloading = false;
     }
 
     void PlayShootingSound()
@@ -47,6 +75,8 @@ public class GunScript : MonoBehaviour
     void Shoot()
     {
         RaycastHit hit;
+        currentAmmo--;
+        ammoVal.text = currentAmmo.ToString();
         muzzleFlash.Play();
         audioSource.Play();
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))

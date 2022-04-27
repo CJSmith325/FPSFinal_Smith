@@ -57,10 +57,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Dash Right") && isGrounded)
         {
             // dash right
-            dash += transform.TransformDirection(Vector3.right * 300);
+            dash += transform.TransformDirection(Vector3.right * 3);
 
             Debug.Log(dash);
-            playerController.Move(dash * Time.deltaTime);
+            playerController.Move(dash);
             dash = new Vector3();
         }
 
