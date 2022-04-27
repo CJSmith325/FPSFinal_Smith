@@ -57,6 +57,7 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
+        ammoVal.text = currentAmmo.ToString();
         isReloading = false;
     }
 
@@ -93,10 +94,17 @@ public class GunScript : MonoBehaviour
             }
 
             EnemyAI enemy = hit.transform.GetComponent<EnemyAI>();
-
+            EnemyAI2 enemy2 = hit.transform.GetComponent<EnemyAI2>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                GameObject impactGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impactGO, 2.5f);
+            }
+
+            if (enemy2 != null)
+            {
+                enemy2.TakeDamage(damage);
                 GameObject impactGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(impactGO, 2.5f);
             }
