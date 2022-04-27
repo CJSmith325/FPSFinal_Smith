@@ -172,7 +172,7 @@ public class EnemyAI : MonoBehaviour
     public void DoDamage()
     {
         PlayerHealth.playerHealth -= 10;
-        StartCoroutine(cameraShake.Shake(0.25f, 0.7f));
+        StartCoroutine(cameraShake.Shake(0.25f, 1.2f));
         hb.SetHealth();
     }
 

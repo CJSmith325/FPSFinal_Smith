@@ -20,6 +20,9 @@ public class HealthBar : MonoBehaviour
         if (slider.value == slider.minValue)
         {
             SceneManager.LoadScene("GameOver");
+            Cursor.lockState = CursorLockMode.None;
+            slider.value = slider.maxValue;
+            PlayerHealth.playerHealth = 100;
         }
     }
 
