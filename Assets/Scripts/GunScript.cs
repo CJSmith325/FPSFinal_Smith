@@ -9,6 +9,15 @@ public class GunScript : MonoBehaviour
     public GameObject hitEffect;
     public GameObject otherHitEffect;
     public Camera fpsCam;
+    private AudioClip gunShot;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        gunShot = GetComponent<AudioClip>();
+        
+    }
 
     // Update is called once per frame
     void Update()
@@ -23,13 +32,14 @@ public class GunScript : MonoBehaviour
     {
         RaycastHit hit;
         muzzleFlash.Play();
+        audioSource.PlayOneShot(gunShot);
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
 
-            Other other = hit.transform.GetComponent<Other>();
+            //Other other = hit.transform.GetComponent<Other>();
 
-            if (other != null)
+            if (hit.transform.gameObject.CompareTag("Other"))
             {
                 // environment particle effect here
                 GameObject otherimpactGO = Instantiate(otherHitEffect, hit.point, Quaternion.LookRotation(hit.normal));
