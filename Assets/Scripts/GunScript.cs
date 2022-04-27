@@ -11,6 +11,7 @@ public class GunScript : MonoBehaviour
     public Camera fpsCam;
     private AudioClip gunShot;
     private AudioSource audioSource;
+    
 
     private void Start()
     {
@@ -24,15 +25,30 @@ public class GunScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            
+            PlayShootingSound();
             Shoot();
+            
         }
+    }
+
+    void PlayShootingSound()
+    {
+
+        //If you need to change the volume
+        //audioSource.volume = volume;
+        //Play the sound once
+        audioSource.PlayOneShot(gunShot);
+
+
+
     }
 
     void Shoot()
     {
         RaycastHit hit;
         muzzleFlash.Play();
-        audioSource.PlayOneShot(gunShot);
+        audioSource.Play();
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);

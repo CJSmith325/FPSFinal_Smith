@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         playerController.Move(velocity * Time.deltaTime);
 
         dash = new Vector3();
+
+        
     }
 
     

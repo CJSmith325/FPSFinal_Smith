@@ -38,6 +38,8 @@ public class EnemyAI : MonoBehaviour
     private Animator animator;
     public float runSpeed = 2f;
     public float health = 50;
+    private AudioClip deathSound;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -46,6 +48,13 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.Find("FirstPersonPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        deathSound = GetComponent<AudioClip>();
     }
 
     // Update is called once per frame
@@ -172,12 +181,28 @@ public class EnemyAI : MonoBehaviour
         health -= amount;
         if (health <= 0f)
         {
+            
+            audioSource.Play();
             Die();
         }
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        PlayDeathSound();
+        Destroy(gameObject, 0.75f);
+        
+    }
+
+    void PlayDeathSound()
+    {
+
+        //If you need to change the volume
+        //audioSource.volume = volume;
+        //Play the sound once
+        audioSource.PlayOneShot(deathSound);
+
+
+
     }
 }
