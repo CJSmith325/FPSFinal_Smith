@@ -7,6 +7,7 @@ public class GunScript : MonoBehaviour
 
     public ParticleSystem muzzleFlash;
     public GameObject hitEffect;
+    public GameObject otherHitEffect;
     public Camera fpsCam;
 
     // Update is called once per frame
@@ -26,13 +27,25 @@ public class GunScript : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
+            Other other = hit.transform.GetComponent<Other>();
+
+            if (other != null)
+            {
+                // environment particle effect here
+                GameObject otherimpactGO = Instantiate(otherHitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(otherimpactGO, 2.5f);
+            }
+
             EnemyAI enemy = hit.transform.GetComponent<EnemyAI>();
+
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
                 GameObject impactGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(impactGO, 2.5f);
             }
+
+            
             
         }
     }
