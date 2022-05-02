@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef661828ff8db1d429bc96c4852165fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 400
+  mouseSensitivity: 250
   playerBody: {fileID: 7677500860125792000}
 --- !u!114 &7677500858587620786
 MonoBehaviour:
@@ -309,11 +309,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   range: 28
-  reloadTime: 1.5
+  reloadTime: 1
   muzzleFlash: {fileID: 7677500860288500814}
   hitEffect: {fileID: 1383165798400594460, guid: 54131fadfcef9684fbe342b958f9ace9, type: 3}
   otherHitEffect: {fileID: 1586206608767913768, guid: 6c1d3d47c9df4c7488a56b30d14ae67a, type: 3}
   fpsCam: {fileID: 7677500858587620791}
+  gunShot: {fileID: 8300000, guid: 7dafcb72466da454c9fd163893201499, type: 3}
+  animSource: {fileID: 7677500858740533661}
+  reloadClip: {fileID: 8300000, guid: acb25353469f12a4cb4e26f72782e179, type: 3}
+  reloadSource: {fileID: 7677500858740533661}
   ammoVal: {fileID: 0}
 --- !u!82 &7677500858740533661
 AudioSource:
@@ -564,7 +568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7677500860125792006}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.019031525, y: 2.08, z: 0.05689907}
   m_LocalScale: {x: 0.94822, y: 0.94822, z: 0.94822}
   m_Children:

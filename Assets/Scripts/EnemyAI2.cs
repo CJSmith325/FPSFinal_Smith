@@ -39,6 +39,7 @@ public class EnemyAI2 : MonoBehaviour
     public float health = 50;
     private AudioClip deathSound;
     private AudioSource audioSource;
+    private bool isDead = false;
 
     private void Awake()
     {
@@ -179,9 +180,9 @@ public class EnemyAI2 : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        if (health <= 0f)
+        if (health <= 0f && isDead == false)
         {
-
+            isDead = true;
             audioSource.Play();
             Die();
         }

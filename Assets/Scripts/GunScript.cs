@@ -16,16 +16,19 @@ public class GunScript : MonoBehaviour
     public GameObject hitEffect;
     public GameObject otherHitEffect;
     public Camera fpsCam;
-    private AudioClip gunShot;
-    private AudioSource audioSource;
+    public AudioClip gunShot;
+    public AudioSource animSource;
+    [Header("Reload")]
+    public AudioClip reloadClip;
+    public AudioSource reloadSource;
     public TextMeshProUGUI ammoVal;
 
     private Animation anim;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        gunShot = GetComponent<AudioClip>();
+        //animSource = GetComponent<AudioSource>();
+        //gunShot = GetComponent<AudioClip>();
         anim = GetComponent<Animation>();
         currentAmmo = maxAmmo;
         ammoVal.text = currentAmmo.ToString();
@@ -50,11 +53,21 @@ public class GunScript : MonoBehaviour
             Shoot();
             
         }
+
+        if (Input.GetButtonDown("R"))
+        {
+            if (currentAmmo != maxAmmo)
+            {
+                StartCoroutine(GunReload());
+            }
+            
+        }
     }
 
     IEnumerator GunReload()
     {
         isReloading = true;
+        reloadSource.PlayOneShot(reloadClip, 2f);
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
         ammoVal.text = currentAmmo.ToString();
@@ -67,7 +80,7 @@ public class GunScript : MonoBehaviour
         //If you need to change the volume
         //audioSource.volume = volume;
         //Play the sound once
-        audioSource.PlayOneShot(gunShot);
+        animSource.PlayOneShot(gunShot);
 
 
 
@@ -79,7 +92,7 @@ public class GunScript : MonoBehaviour
         currentAmmo--;
         ammoVal.text = currentAmmo.ToString();
         muzzleFlash.Play();
-        audioSource.Play();
+        animSource.Play();
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
