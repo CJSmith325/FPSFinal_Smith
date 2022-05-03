@@ -64,7 +64,7 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    IEnumerator GunReload()
+    public IEnumerator GunReload()
     {
         isReloading = true;
         reloadSource.PlayOneShot(reloadClip, 2f);

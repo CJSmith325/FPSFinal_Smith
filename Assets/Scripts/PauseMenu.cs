@@ -7,6 +7,12 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject gun;
+    public GunScript gunObj;
+
+    private void Awake()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,6 +36,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         gun.SetActive(true);
         Time.timeScale = 1f;
+        StartCoroutine(gunObj.GunReload());
         GameIsPaused = false;
     }
 
@@ -39,6 +46,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         gun.SetActive(false);
         Time.timeScale = 0f;
+        StopCoroutine(gunObj.GunReload());
         GameIsPaused = true;
     }
 

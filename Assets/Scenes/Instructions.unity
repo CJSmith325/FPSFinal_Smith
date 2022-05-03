@@ -1826,14 +1826,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: This game is a zombie-themed first person shooter. Press Escape to pause
-    in-game. Player health and magazine ammo will be displayed in the bottom left.
-    Each zombie takes 5 hits to kill (bleed out over short time period), and it takes
-    10 hits to die in Level 1 vs 5 hits to die in Level 2. On top of dealing two
-    times as much damage in Level 2, the zombies will be partially glowing pink and
-    will run after the player 1.5 times as fast. The goal of the game is to survive
-    the zombies and make it to the large green finish point attached to one of the
-    levels walls, which will advance you to the next level/win the game. If you die,
-    you lose. Good luck.
+    in-game, which after the first playthrough without reloading the apllication
+    will have to be pressed twice. Player health and magazine ammo will be displayed
+    in the bottom left. Each zombie takes 5 hits to kill (bleed out over short time
+    period), and it takes 10 hits to die in Level 1 vs 5 hits to die in Level 2.
+    On top of dealing two times as much damage in Level 2, the zombies will be partially
+    glowing pink and will run after the player 1.5 times as fast. The goal of the
+    game is to survive the zombies and make it to the large green finish point attached
+    to one of the levels walls, which will advance you to the next level/win the
+    game. If you die, you lose. Good luck.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -138,6 +138,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7677500858740533655, guid: fe9eaeab7a3c59c479a8dc1f64cb4b6c, type: 3}
   m_PrefabInstance: {fileID: 7677500859272792260}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &99800517 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7677500858740533651, guid: fe9eaeab7a3c59c479a8dc1f64cb4b6c, type: 3}
+  m_PrefabInstance: {fileID: 7677500859272792260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99800514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c8f8069f2926a42932fd33ecc425fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &184242136
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 600050052}
   gun: {fileID: 99800514}
+  gunObj: {fileID: 99800517}
 --- !u!114 &370805343
 MonoBehaviour:
   m_ObjectHideFlags: 0

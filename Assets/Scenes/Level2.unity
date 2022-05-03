@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 572121228}
   gun: {fileID: 1030149654}
+  gunObj: {fileID: 1030149660}
 --- !u!114 &1065605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,6 +1522,17 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1030149660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7677500858740533651, guid: fe9eaeab7a3c59c479a8dc1f64cb4b6c, type: 3}
+  m_PrefabInstance: {fileID: 1030149653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030149654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c8f8069f2926a42932fd33ecc425fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1039641354
 PrefabInstance:
   m_ObjectHideFlags: 0
